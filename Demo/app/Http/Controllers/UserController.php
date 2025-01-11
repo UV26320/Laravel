@@ -41,14 +41,18 @@ class UserController extends Controller
 
     // function which is get a user details
 
-    function addUser(Request $request){
-        echo $request->username;
-        echo '<br>';
-        echo $request->email;
-        echo '<br>';
-        echo $request->city;
-       
-      }
+    function addUser(Request $request)
+    {
+        // Retrieve data from the request
+        $data = [
+            'username' => $request->username,
+            'email' => $request->email,
+            'city' => $request->city,
+        ];
+    
+        // Return the data as JSON
+        return response()->json($data);
+    }
 
 
 }
