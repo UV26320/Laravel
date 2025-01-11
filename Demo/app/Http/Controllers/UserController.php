@@ -47,7 +47,7 @@ class UserController extends Controller
 {
     // Define validation rules and custom messages
     $rules = [
-        'username' => 'required|string|max:50', // Required, string, max length 50
+        'username' => 'required|string|max:50|uppercase', // Required, string, max length 50
         'email' => 'required|email', // Required, must be a valid email
         'city' => 'required|string|max:50', // Required, string, max length 50
         'interests' => 'nullable|array', // Optional, must be an array
