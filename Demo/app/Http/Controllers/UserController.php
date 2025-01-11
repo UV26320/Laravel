@@ -45,9 +45,13 @@ class UserController extends Controller
     {
         // Retrieve data from the request
         $data = [
-            'username' => $request->username,
-            'email' => $request->email,
-            'city' => $request->city,
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'city' => $request->input('city'),
+            'interests' => $request->input('interests'), // This will be an array
+            'gender' => $request->input('gender'),
+            'country' => $request->input('country'),
+            'age' => $request->input('age'),
         ];
     
         // Return the data as JSON
