@@ -52,6 +52,12 @@
         </div>
     </div>
 
+
+    <!-- // ---------------------------------------------------- CODE GENERATION ---------------------------------------------------- -->
+    <div>
+        <h2>{{url()->previous()}}</h2>
+    </div>
+
     <footer class="bg-primary text-white text-center py-3 mt-5">
         <p>&copy; {{ date('Y') }} My Website. All rights reserved.</p>
     </footer>
