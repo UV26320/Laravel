@@ -56,63 +56,86 @@
     <div class="form-container">
         <h2>Add User</h2>
         <form action="addUser" method="post">
-            @csrf
-            
-            <!-- Text Fields -->
-            <div class="input-wrapper">
-                <label for="username">User Name</label>
-                <input type="text" placeholder="Enter User Name" name="username" id="username">
-            </div>
-            <div class="input-wrapper">
-                <label for="email">Email</label>
-                <input type="text" placeholder="Enter User Email" name="email" id="email">
-            </div>
-            <div class="input-wrapper">
-                <label for="city">City</label>
-                <input type="text" placeholder="Enter User City" name="city" id="city">
-            </div>
-            
-            <!-- Checkbox -->
-            <div class="input-wrapper">
-                <label>Interests</label>
-                <input type="checkbox" name="interests[]" value="Sports"> Sports<br>
-                <input type="checkbox" name="interests[]" value="Music"> Music<br>
-                <input type="checkbox" name="interests[]" value="Travel"> Travel
-            </div>
-            
-            <!-- Radio Buttons -->
-            <div class="input-wrapper">
-                <label>Gender</label>
-                <input type="radio" name="gender" value="Male" id="male">
-                <label for="male">Male</label><br>
-                <input type="radio" name="gender" value="Female" id="female">
-                <label for="female">Female</label><br>
-                <input type="radio" name="gender" value="Other" id="other">
-                <label for="other">Other</label>
-            </div>
-            
-            <!-- Dropdown -->
-            <div class="input-wrapper">
-                <label for="country">Country</label>
-                <select name="country" id="country">
-                    <option value="USA">USA</option>
-                    <option value="India">India</option>
-                    <option value="UK">UK</option>
-                    <option value="Canada">Canada</option>
-                </select>
-            </div>
-            
-            <!-- Range -->
-            <div class="input-wrapper">
-                <label for="age">Age Range</label>
-                <input type="range" name="age" id="age" min="18" max="60">
-            </div>
-            
-            <!-- Submit Button -->
-            <div class="input-wrapper">
-                <button type="submit">Add New User</button>
-            </div>
-        </form>
+    @csrf
+
+    <!-- Text Fields -->
+    <div class="input-wrapper">
+        <label for="username">User Name <span style="color: red;">*</span></label>
+        <input type="text" placeholder="Enter User Name" name="username" id="username" value="{{ old('username') }}">
+        @error('username')
+            <span style="color: red; font-size: 12px;">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <div class="input-wrapper">
+        <label for="email">Email <span style="color: red;">*</span></label>
+        <input type="text" placeholder="Enter User Email" name="email" id="email" value="{{ old('email') }}">
+        @error('email')
+            <span style="color: red; font-size: 12px;">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <div class="input-wrapper">
+        <label for="city">City <span style="color: red;">*</span></label>
+        <input type="text" placeholder="Enter User City" name="city" id="city" value="{{ old('city') }}">
+        @error('city')
+            <span style="color: red; font-size: 12px;">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <!-- Checkbox -->
+    <div class="input-wrapper">
+        <label>Interests</label>
+        <span style="font-size: 12px; color: gray;">(Select one or more)</span><br>
+        <input type="checkbox" name="interests[]" value="Sports" {{ is_array(old('interests')) && in_array('Sports', old('interests')) ? 'checked' : '' }}> Sports<br>
+        <input type="checkbox" name="interests[]" value="Music" {{ is_array(old('interests')) && in_array('Music', old('interests')) ? 'checked' : '' }}> Music<br>
+        <input type="checkbox" name="interests[]" value="Travel" {{ is_array(old('interests')) && in_array('Travel', old('interests')) ? 'checked' : '' }}> Travel<br>
+    </div>
+
+    <!-- Radio Buttons -->
+    <div class="input-wrapper">
+        <label>Gender <span style="color: red;">*</span></label><br>
+        <input type="radio" name="gender" value="Male" id="male" {{ old('gender') == 'Male' ? 'checked' : '' }}>
+        <label for="male">Male</label><br>
+        <input type="radio" name="gender" value="Female" id="female" {{ old('gender') == 'Female' ? 'checked' : '' }}>
+        <label for="female">Female</label><br>
+        <input type="radio" name="gender" value="Other" id="other" {{ old('gender') == 'Other' ? 'checked' : '' }}>
+        <label for="other">Other</label>
+        @error('gender')
+            <span style="color: red; font-size: 12px;">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <!-- Dropdown -->
+    <div class="input-wrapper">
+        <label for="country">Country <span style="color: red;">*</span></label>
+        <select name="country" id="country">
+            <option value="USA" {{ old('country') == 'USA' ? 'selected' : '' }}>USA</option>
+            <option value="India" {{ old('country') == 'India' ? 'selected' : '' }}>India</option>
+            <option value="UK" {{ old('country') == 'UK' ? 'selected' : '' }}>UK</option>
+            <option value="Canada" {{ old('country') == 'Canada' ? 'selected' : '' }}>Canada</option>
+        </select>
+        @error('country')
+            <span style="color: red; font-size: 12px;">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <!-- Range -->
+    <div class="input-wrapper">
+        <label for="age">Age Range <span style="color: red;">*</span></label>
+        <input type="range" name="age" id="age" min="18" max="60" value="{{ old('age', 39) }}" oninput="this.nextElementSibling.value = this.value;">
+        <output style="font-weight: bold; color: #333;">{{ old('age', 39) }}</output>
+        @error('age')
+            <span style="color: red; font-size: 12px;">{{ $message }}</span>
+        @enderror
+    </div>
+
+    <!-- Submit Button -->
+    <div class="input-wrapper">
+        <button type="submit">Add New User</button>
+    </div>
+</form>
+
     </div>
 </body>
 </html>
